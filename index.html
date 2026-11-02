@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Compara los requisitos de una vacante con tus habilidades técnicas sin enviar datos fuera del navegador." data-i18n-content="metaDescription">
+  <title>JobMatch Local | Comparador de vacantes y habilidades</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#main-content" aria-label="JobMatch Local, ir al contenido principal" data-i18n-aria-label="brandLabel">
+      <span class="brand-mark" aria-hidden="true">JM</span>
+      <span>JobMatch <strong>Local</strong></span>
+    </a>
+    <div class="topbar-actions">
+      <p class="privacy-note"><span aria-hidden="true">●</span> <span data-i18n="privacy">Tus datos no salen del navegador</span></p>
+      <div class="language-switch" role="group" aria-label="Seleccionar idioma" data-i18n-aria-label="languageSelector">
+        <button type="button" class="language-button is-active" data-language="es" aria-pressed="true">ES</button>
+        <button type="button" class="language-button" data-language="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="page-shell">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow" data-i18n="eyebrow">Herramienta de análisis local</p>
+      <h1 id="page-title" data-i18n="pageTitle">Compara una vacante con tus habilidades.</h1>
+      <p data-i18n="intro">Pega los requisitos, revisa las coincidencias y detecta qué conocimientos conviene reforzar antes de presentar tu candidatura.</p>
+    </section>
+
+    <div class="workspace">
+      <section class="panel input-panel" aria-labelledby="input-title">
+        <div class="panel-heading">
+          <div>
+            <p class="step" data-i18n="stepData">01 · Datos</p>
+            <h2 id="input-title" data-i18n="inputTitle">Vacante y perfil</h2>
+          </div>
+          <button class="link-button" id="example-button" type="button" data-i18n="loadExample">Cargar ejemplo</button>
+        </div>
+
+        <form id="match-form" novalidate>
+          <div class="field">
+            <label for="job-text"><span data-i18n="jobLabel">Texto de la vacante</span> <span aria-hidden="true">*</span></label>
+            <p id="job-help" data-i18n="jobHelp">Copia la descripción o los requisitos técnicos de la oferta.</p>
+            <textarea id="job-text" rows="10" required aria-describedby="job-help job-error" placeholder="Ej.: Buscamos desarrollador junior con conocimientos de HTML, CSS y JavaScript..." data-i18n-placeholder="jobPlaceholder"></textarea>
+            <p class="error" id="job-error" role="alert"></p>
+          </div>
+
+          <fieldset>
+            <legend data-i18n="skillsLegend">Tus habilidades</legend>
+            <p class="field-help" data-i18n="skillsInstruction">Añade una habilidad por línea o sepáralas con comas.</p>
+            <textarea id="skills-text" rows="5" aria-describedby="skills-help">HTML
+CSS
+JavaScript
+Inteligencia artificial
+Python
+SQL</textarea>
+            <p id="skills-help" class="field-help" data-i18n="skillsHelp">Puedes incluir habilidades compuestas, por ejemplo «diseño responsive».</p>
+          </fieldset>
+
+          <div class="form-actions">
+            <button class="button button-secondary" id="clear-button" type="reset" data-i18n="clear">Limpiar</button>
+            <button class="button button-primary" type="submit" data-i18n="analyze">Analizar compatibilidad</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel results-panel" aria-labelledby="results-title">
+        <div class="panel-heading results-heading">
+          <div>
+            <p class="step" data-i18n="stepResult">02 · Resultado</p>
+            <h2 id="results-title" data-i18n="resultsTitle">Compatibilidad orientativa</h2>
+          </div>
+          <span class="result-status" id="result-status" data-i18n="notAnalyzed">Sin analizar</span>
+        </div>
+
+        <div id="empty-state" class="empty-state">
+          <span aria-hidden="true">%</span>
+          <p data-i18n="emptyState">Completa los datos para ver el porcentaje y las habilidades detectadas.</p>
+        </div>
+
+        <div id="results" class="results" hidden aria-live="polite">
+          <div class="score-card">
+            <div class="score-ring" id="score-ring" role="img" aria-label="Compatibilidad del 0 por ciento">
+              <span id="score-value">0%</span>
+            </div>
+            <div>
+              <p class="score-label" data-i18n="scoreLabel">Coincidencia de habilidades</p>
+              <p class="score-message" id="score-message"></p>
+            </div>
+          </div>
+
+          <div class="result-grid">
+            <article class="result-card matched-card">
+              <h3><span aria-hidden="true">✓</span> <span data-i18n="matched">Coinciden</span> <strong id="matched-count">0</strong></h3>
+              <ul id="matched-list"></ul>
+            </article>
+
+            <article class="result-card missing-card">
+              <h3><span aria-hidden="true">↗</span> <span data-i18n="missing">Por desarrollar</span> <strong id="missing-count">0</strong></h3>
+              <ul id="missing-list"></ul>
+            </article>
+          </div>
+
+          <aside class="explanation">
+            <h3 data-i18n="calculationTitle">Cómo se calculó</h3>
+            <p id="calculation-note"></p>
+          </aside>
+        </div>
+
+        <p class="disclaimer" data-i18n="disclaimer">Este análisis utiliza coincidencias de texto. Es una orientación inicial y no determina si cumples todos los requisitos de una vacante.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p data-i18n="footer">Creado con HTML, CSS y JavaScript · Análisis 100 % local</p>
+  </footer>
+</body>
+</html>
